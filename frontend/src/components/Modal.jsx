@@ -3,15 +3,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 // componentes
 import ModalBtn from './ModalBtn.jsx';
-
+// contexto
+import { GlobalContext } from '../context/GlobalContext.jsx';
+import { useContext } from 'react';
 
 const Modal = () => {
+    // contexto para cerrar el modal
+    const context = useContext(GlobalContext);
+    const { closeModal } = context;
+
     return (
-        <div className="absolute top-0 w-screen backdrop-blur-sm h-screen bg-[#00000095] flex justify-center items-center transition-all">
+        <div className="absolute top-0 w-screen backdrop-blur-sm h-screen bg-[#000000b6] flex justify-center items-center transition-all">
             {/* contenedor inputs */}
             <div className="w-full relative max-w-[500px] p-8 rounded-lg bg-[#1e1e1e] gap-7 flex flex-col">
-                {/* cerrar icon */}
-                <FontAwesomeIcon className="text-red-500 absolute top-3 right-3 size-6 cursor-pointer" icon={faCircleXmark}/>
+                {/* icono de cerrar */}
+                <FontAwesomeIcon onClick={closeModal} className="text-red-500 absolute top-3 right-3 size-6 cursor-pointer" icon={faCircleXmark}/>
                 <div className="flex flex-col gap-2">
                     <label className="text-white font-bold">Nombre:</label>
                     <input
