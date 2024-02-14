@@ -1,22 +1,33 @@
+// dependencias
+import { useContext, useEffect } from "react";
 // componentes
 import Actions from "./Actions.jsx";
-import Modal from "./Modal.jsx";
+import AreaConocimiento from "./AreaConocimiento.jsx";
+// contexto
+import { GlobalContext } from "../context/GlobalContext.jsx";
 
 const Table = () => {
+    // traer areas de conocimiento del contexto
+    const context = useContext(GlobalContext);
+    const { areasConocimiento } = context;
+
     return (
         <table className="w-full">
-            <tr>
-                <td className="p-2 border-solid border-black border-2 bg-blue-900 text-white font-bold uppercase w-[10%]">Id</td>
-                <td className="p-2 border-solid border-black border-2 bg-blue-900 text-white font-bold uppercase w-[40%]">Nombre</td>
-                <td className="p-2 border-solid border-black border-2 bg-blue-900 text-white font-bold uppercase w-[40%]">Descripcion</td>
-                <td className="p-2 border-solid border-black border-2 bg-blue-900 text-white font-bold uppercase w-[10%]">Acciones</td>
-            </tr>
-            <tr className="bg-white">
-                <td className="w-[10%] border-solid border-black border-2 text-center">123</td>
-                <td className="w-[45%] border-solid border-black border-2 text-center">Desarrollo web</td>
-                <td className="w-[45%] border-solid border-black border-2 p-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, dignissimos.</td>
-                <td className="w-[10%] border-solid border-black border-2 text-center"><Actions/></td>
-            </tr>
+            <thead>
+                <tr>
+                    <td className="p-2 border-solid border-black border-2 bg-blue-900 text-white font-bold uppercase w-[10%]">Id</td>
+                    <td className="p-2 border-solid border-black border-2 bg-blue-900 text-white font-bold uppercase w-[40%]">Nombre</td>
+                    <td className="p-2 border-solid border-black border-2 bg-blue-900 text-white font-bold uppercase w-[40%]">Descripcion</td>
+                    <td className="p-2 border-solid border-black border-2 bg-blue-900 text-white font-bold uppercase w-[10%]">Acciones</td>
+                </tr>
+            </thead>
+            <tbody>
+                {
+                    areasConocimiento?.map(area => {
+                        return <AreaConocimiento key={area.id} id={area.id} nombre={area.nombre} descripcion={area.descripcion}/>;
+                    })
+                }
+            </tbody>
         </table>
     );
 }

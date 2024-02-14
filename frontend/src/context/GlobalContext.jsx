@@ -11,11 +11,16 @@ const GlobalContextProvider = ({children}) => {
     // cerrar modal
     const closeModal = () => setIsOpen(false);
 
+    // almacenar las areas del conocimiento
+    const [areasConocimiento, setAreasConocimiento] = useState([]);
+
     return (
         <GlobalContext.Provider value={{
             isOpen,
             openModal,
-            closeModal
+            closeModal,
+            areasConocimiento,
+            setAreasConocimiento,
         }}>
             {children}
         </GlobalContext.Provider>
