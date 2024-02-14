@@ -1,22 +1,19 @@
 // componentes
-import Modal from "./components/Modal.jsx";
+import Modal from "./components/AddModal.jsx";
 import Table from "./components/Table.jsx";
 import ModalBtn from "./components/ModalBtn.jsx";
+import UpdateModal from "./components/UpdateModal.jsx";
 // react dependencies
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 // contexto
 import { GlobalContext } from "./context/GlobalContext.jsx";
 
 function App() {
   // contexto para abrir el modal
   const context = useContext(GlobalContext);
-  const { openModal, isOpen, areasConocimiento } = context;
+  const { openModal, isOpen, areasConocimiento, isUpdateOpen, updateArea } = context;
 
-  // actualizar el contenido cada vez que cambie
-  useEffect(() => {
-    areasConocimiento
-  }, [areasConocimiento]);
-
+  const { nombre, descripcion } = updateArea;
 
   return (
     <div className="w-full h-screen flex flex-col gap-12 justify-center items-center p-8 bg-[#1e1e1e]">
@@ -29,9 +26,9 @@ function App() {
           <ModalBtn backgroundState={true} text="Agregar" onclick={openModal}/>
         </div>
       </div>
-      {
-        isOpen && <Modal/>
-      }
+      { isOpen && <Modal/> }
+      { isUpdateOpen && <UpdateModal newDescripcion={descripcion} newNombre={nombre}/> }
+
     </div>
   )
 }
