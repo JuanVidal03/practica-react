@@ -3,7 +3,7 @@ import Modal from "./components/Modal.jsx";
 import Table from "./components/Table.jsx";
 import ModalBtn from "./components/ModalBtn.jsx";
 // react dependencies
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 // contexto
 import { GlobalContext } from "./context/GlobalContext.jsx";
 
@@ -11,6 +11,12 @@ function App() {
   // contexto para abrir el modal
   const context = useContext(GlobalContext);
   const { openModal, isOpen, areasConocimiento } = context;
+
+  // actualizar el contenido cada vez que cambie
+  useEffect(() => {
+    areasConocimiento
+  }, [areasConocimiento]);
+
 
   return (
     <div className="w-full h-screen flex flex-col gap-12 justify-center items-center p-8 bg-[#1e1e1e]">
